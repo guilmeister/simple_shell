@@ -1,4 +1,4 @@
-##0x16. C - Simple Shell
+0x16. C - Simple Shell
 
 ##Foundations - Low-level programming & Algorithm ― Linux and Unix system 
 programming 
