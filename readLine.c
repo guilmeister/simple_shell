@@ -3,9 +3,14 @@
 char *readLine(void)
 {
 	char *line = NULL;
-	ssize_t linesize = 0;
+	size_t linesize = 0;
+	int stat;
 
-	getline(&line, &linesize, stdin);
+	stat = getline(&line, &linesize, stdin);
+      	if (stat == -1 || _strlen(line - 1) == EOF)
+	{
+		exit(1);
+	}
 	return (line);
 }
 int _strlen(char *string)
