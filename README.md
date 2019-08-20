@@ -1,7 +1,6 @@
 0x16. C - Simple Shell
 
-## Foundations - Low-level programming & Algorithm ― Linux and Unix system
-programming
+## Foundations - Low-level programming & Algorithm ― Linux and Unix system programming
 
 ## Background Context
 
