@@ -24,7 +24,7 @@ char **strbreak(char *buffer)
 
 		words[index] = _strdup(token);
 		if (words[index] == NULL)
-		{free(words[index]);
+		{	free(words[index]);
 			return (NULL);
 		}
 		index++;

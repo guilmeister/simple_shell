@@ -6,7 +6,7 @@
 #include <sys/wait.h>
 #include "holberton.h"
 
-int main(int ac, char **av)
+int main(int ac, char **av, char **env)
 {
 	char *buffer = NULL;
 	char **token;
@@ -25,6 +25,12 @@ int main(int ac, char **av)
 		{	free(buffer);
 			perror("Error");
 			exit(98);
+		}
+
+		if (_strcmp("env\n", buffer) == 0)
+		{
+			my_env(env);
+			continue;
 		}
 		token = strbreak(buffer);
 		exec(token);
@@ -61,4 +67,17 @@ int my_exit(char **args)
 {
 	args = args;
 	exit(0);
+}
+
+int my_env(char **env)
+{
+	int x;
+
+	for (x = 0; env[x] != NULL; x++)
+	{
+		write(STDOUT_FILENO, env[x], _strlen(env[x]));
+		_putchar('\n');
+	}
+
+	return (1);
 }

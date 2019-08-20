@@ -3,8 +3,8 @@ int launch(char **tokens);
 int exec(char **args)
 {
 	int i;
-	int (*builtin_func[]) (char **) = {&my_cd, &my_help, &my_exit};
-	char *builtin_str[] = {"cd", "help", "exit"};
+	int (*builtin_func[]) (char **) = {&my_cd, &my_help, &my_exit, &my_env};
+	char *builtin_str[] = {"cd", "help", "exit", "env"};
 
 	if (args[0] == NULL)
 	{

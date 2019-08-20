@@ -1,6 +1,7 @@
 #ifndef HOLBERTON_H
 #define HOLBERTON_H
 #define SIZE 1024
+
 #include <string.h>
 #include <sys/wait.h>
 #include <stdio.h>
@@ -26,5 +27,7 @@ int _strlen(char *s);
 char **strbreak(char *buffer);
 char *_strdup(char *str);
 void free_tokens(char **buffer);
+int my_env(char **env);
+int _putchar(char c);
 
 #endif
