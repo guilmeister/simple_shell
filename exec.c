@@ -21,8 +21,3 @@ int exec(char **args)
 	launch(args);
 	return(1);
 }
-int my_exit(char **args)
-{
-	args = args;
-	return (-1);
-}

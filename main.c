@@ -22,7 +22,7 @@ int main(int ac, char **av)
 
 		check = getline(&buffer, &length, stdin);
 		if (check == -1)
-		{free(buffer);
+		{	free(buffer);
 			perror("Error");
 			exit(98);
 		}
@@ -33,6 +33,7 @@ int main(int ac, char **av)
 	free(buffer);
 	return (0);
 }
+
 int my_cd(char **args)
 {
 	if (args[1] == NULL)
@@ -45,6 +46,7 @@ int my_cd(char **args)
 	}
 	return (1);
 }
+
 int my_help(char **args)
 {
 	args++;
@@ -54,6 +56,7 @@ int my_help(char **args)
 	write(2, "Use the man command to find info on other programs\n", 52);
 	return (1);
 }
+
 int my_exit(char **args)
 {
 	args = args;
