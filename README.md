@@ -1,20 +1,15 @@
 0x16. C - Simple Shell
 
-## Foundations - Low-level programming & Algorithm ― Linux and Unix system 
-programming 
+## Foundations - Low-level programming & Algorithm ― Linux and Unix system
+programming
+
+## Background Context
+
+Write a simple UNIX command interpreter.
 
 ## Learning Objectives
 
 ## At the end of this project, you are expected to be able to explain to anyone, without the help of Google:
-General
-
-## Foundations - Low-level programming & Algorithm ― Linux and Unix system
-programming
-
-## Learning Objectives
-At the end of this project, you are expected to be able to explain to anyone, without the help of Google:
-
-## General
 
 Who designed and implemented the original Unix operating system
 
