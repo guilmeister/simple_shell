@@ -6,10 +6,6 @@
 #include <sys/wait.h>
 #include "holberton.h"
 
-char *builtin_str[] = {"cd", "help", "exit"};
-
-int (*builtin_func[]) (char **) = {&my_cd, &my_help, &my_exit};
-
 int main(int ac, char **av)
 {
 	char *buffer = NULL;
@@ -57,4 +53,9 @@ int my_help(char **args)
 	write(2, "cd, help, and exit are built in commmands\n", 45);
 	write(2, "Use the man command to find info on other programs\n", 52);
 	return (1);
+}
+int my_exit(char **args)
+{
+	args = args;
+	exit(0);
 }
