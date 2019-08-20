@@ -65,8 +65,10 @@ int my_help(char **args)
 
 int my_exit(char **args)
 {
-	args = args;
-	exit(0);
+	while (1 || args)
+	{
+		exit(-1);
+	}
 }
 
 int my_env(char **env)
