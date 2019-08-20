@@ -6,10 +6,12 @@ int launch(char **token)
 	int status;
 
 	pid = fork();
+
 	if (pid == 0)
 	{
 		if (execve(token[0], token, NULL) == -1)
 			perror("error");
+		exit(1);
 	}
 	if (pid > 0)
 		wait(&status);

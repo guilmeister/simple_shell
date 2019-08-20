@@ -21,12 +21,10 @@ int main(int ac, char **av, char **env)
 		write(STDOUT_FILENO, "$ ", 2);
 
 		check = getline(&buffer, &length, stdin);
-		if (check == -1)
+		if (check == -1 || !buffer)
 		{	free(buffer);
 			perror("Error");
-			exit(98);
 		}
-
 		if (_strcmp("env\n", buffer) == 0)
 		{
 			my_env(env);
@@ -39,7 +37,6 @@ int main(int ac, char **av, char **env)
 	free(buffer);
 	return (0);
 }
-
 int my_cd(char **args)
 {
 	if (args[1] == NULL)
@@ -63,14 +60,6 @@ int my_help(char **args)
 	return (1);
 }
 
-int my_exit(char **args)
-{
-	while (1 || args)
-	{
-		exit(-1);
-	}
-}
-
 int my_env(char **env)
 {
 	int x;
@@ -82,4 +71,11 @@ int my_env(char **env)
 	}
 
 	return (1);
+}
+int my_exit(char **args)
+{
+	while (1 || args)
+	{
+		exit(EXIT_SUCCESS);
+	}
 }
