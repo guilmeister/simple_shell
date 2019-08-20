@@ -1,18 +1,60 @@
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 #include "holberton.h"
 
-int main(int argc, char *argv[])
+char *builtin_str[] = {"cd", "help", "exit"};
+
+int (*builtin_func[]) (char **) = {&my_cd, &my_help, &my_exit};
+
+int main(int ac, char **av)
 {
-	char *line = malloc(SIZE), *args;
-	int stat;
+	char *buffer = NULL;
+	char **token;
+	size_t length = 0;
+	int check;
+
+	(void)ac;
+	(void)av;
 
 	while (1)
 	{
-		write(1, "$ ", 2);
-		line = readLine();
-		argv = parse(line);
-		exec(argv);
+		write(STDOUT_FILENO, "$ ", 2);
+
+		check = getline(&buffer, &length, stdin);
+		if (check == -1)
+		{free(buffer);
+			perror("Error");
+			exit(98);
+		}
+		token = strbreak(buffer);
+		exec(token);
 	}
-	free(line);
-	free(argv);
+	free_tokens(token);
+	free(buffer);
+	return (0);
+}
+int my_cd(char **args)
+{
+	if (args[1] == NULL)
+	{
+		perror("error");
+	}
+	else if (chdir(args[1]) != 0)
+	{
+		perror("Error");
+	}
+	return (1);
+}
+int my_help(char **args)
+{
+	args++;
+	write(2, "Welcome to Trevor's and Ed's simple Unix shell!\n", 56);
+	write(2, "type program names and arguments and press enter\n", 56);
+	write(2, "cd, help, and exit are built in commmands\n", 45);
+	write(2, "Use the man command to find info on other programs\n", 52);
 	return (1);
 }

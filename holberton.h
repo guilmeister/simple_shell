@@ -13,10 +13,18 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+int my_cd(char **args);
+int my_help(char **args);
+int my_exit(char **args);
 int exec(char **argv);
 char **parse(char *line);
-int main(void);
 char *readLine(void);
 int _strlen(char *string);
+int exec(char **token);
+int _strcmp(char *s1, char *s2);
+int _strlen(char *s);
+char **strbreak(char *buffer);
+char *_strdup(char *str);
+void free_tokens(char **buffer);
 
 #endif
