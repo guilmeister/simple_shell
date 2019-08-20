@@ -26,10 +26,14 @@ int main(int ac, char **av, char **env)
 			perror("Error");
 			exit(98);
 		}
-
 		if (_strcmp("env\n", buffer) == 0)
 		{
 			my_env(env);
+			continue;
+		}
+		if (_strcmp("path\n", buffer) == 0)
+		{
+			my_path(env);
 			continue;
 		}
 		token = strbreak(buffer);
@@ -37,7 +41,7 @@ int main(int ac, char **av, char **env)
 	}
 	free_tokens(token);
 	free(buffer);
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 int my_cd(char **args)
@@ -50,7 +54,7 @@ int my_cd(char **args)
 	{
 		perror("Error");
 	}
-	return (1);
+	return (EXIT_SUCCESS);
 }
 
 int my_help(char **args)
@@ -60,7 +64,7 @@ int my_help(char **args)
 	write(2, "type program names and arguments and press enter\n", 56);
 	write(2, "cd, help, and exit are built in commmands\n", 45);
 	write(2, "Use the man command to find info on other programs\n", 52);
-	return (1);
+	return (EXIT_SUCCESS);
 }
 
 int my_exit(char **args)
@@ -78,6 +82,19 @@ int my_env(char **env)
 		write(STDOUT_FILENO, env[x], _strlen(env[x]));
 		_putchar('\n');
 	}
+	return (EXIT_SUCCESS);
+}
 
-	return (1);
+int my_path(char **env)
+{
+	int x;
+
+	for (x = 0; env[x] != NULL; x++)
+	{
+		if(_strstr(env[x], "PATH"))
+		{	write(STDOUT_FILENO, env[x], _strlen(env[x]));
+			_putchar('\n');
+		}
+	}
+	return (EXIT_SUCCESS);
 }

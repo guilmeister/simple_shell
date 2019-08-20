@@ -29,5 +29,7 @@ char *_strdup(char *str);
 void free_tokens(char **buffer);
 int my_env(char **env);
 int _putchar(char c);
+char *_strstr(char *haystack, char *needle);
+int my_path(char **env);
 
 #endif
