@@ -11,7 +11,7 @@ int exec(char **args)
 		perror("error");
 		return (EXIT_FAILURE);
 	}
-	for (i = 0; i < 3; i++)
+	for (i = 0; i < 4; i++)
 	{
 		if (_strcmp(args[0], builtin_str[i]) == 0)
 		{
