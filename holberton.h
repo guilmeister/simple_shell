@@ -14,10 +14,12 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+char extern **environ;
+
 int my_cd(char **args);
 int my_help(char **args);
 int my_exit(char **args);
-int exec(char **argv);
+int exec(char **args);
 char **parse(char *line);
 char *readLine(void);
 int _strlen(char *string);
@@ -25,11 +27,13 @@ int exec(char **token);
 int _strcmp(char *s1, char *s2);
 int _strlen(char *s);
 char **strbreak(char *buffer);
-char *_strdup(char *str);
+char *_strdup_path(char *str);
 void free_tokens(char **buffer);
 int my_env(char **env);
 int _putchar(char c);
 char *_strstr(char *haystack, char *needle);
 int my_path(char **env);
+char *_strcat(char *dest, char *src);
+char *_strdup(char *str);
 
 #endif

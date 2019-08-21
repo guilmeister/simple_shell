@@ -1,9 +1,3 @@
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
 #include "holberton.h"
 
 int main(int ac, char **av, char **env)
@@ -88,12 +82,24 @@ int my_env(char **env)
 int my_path(char **env)
 {
 	int x;
+	char *token;
+	char *buffer = "ls";
+	char *concat;
 
 	for (x = 0; env[x] != NULL; x++)
 	{
-		if(_strstr(env[x], "PATH"))
-		{	write(STDOUT_FILENO, env[x], _strlen(env[x]));
-			_putchar('\n');
+		token = strtok(env[x], "=");
+
+		if(_strcmp(env[x], "PATH") == 0)
+		{
+			while (token != NULL)
+			{
+				token = _strdup_path(strtok(NULL, ":"));
+				if (token == NULL)
+					break;
+				concat = _strcat(token, buffer);
+				printf("%s\n", concat);
+			}
 		}
 	}
 	return (EXIT_SUCCESS);

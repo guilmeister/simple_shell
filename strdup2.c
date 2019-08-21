@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "holberton.h"
 
 /**
@@ -10,7 +8,7 @@
  * Return: string
  */
 
-char *_strdup_path(char *str)
+char *_strdup(char *str)
 {
 	int i;
 	int n = 0;
@@ -22,7 +20,7 @@ char *_strdup_path(char *str)
 	for (i = 0; str[i] != '\0'; i++)
 		n++;
 
-	string = (char *) malloc((n + 2) * sizeof(char));
+	string = (char *) malloc((n + 1) * sizeof(char));
 
 	if (string == NULL)
 		return (NULL);
@@ -30,8 +28,6 @@ char *_strdup_path(char *str)
 	for (i = 0; i < n; i++)
 		string[i] = str[i];
 
-	string[i] = '/';
-	i++;
 	string[i] = '\0';
 
 	return (string);
