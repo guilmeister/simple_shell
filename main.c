@@ -59,19 +59,6 @@ int my_help(char **args)
 	write(2, "Use the man command to find info on other programs\n", 52);
 	return (1);
 }
-
-int my_env(char **env)
-{
-	int x;
-
-	for (x = 0; env[x] != NULL; x++)
-	{
-		write(STDOUT_FILENO, env[x], _strlen(env[x]));
-		_putchar('\n');
-	}
-
-	return (1);
-}
 int my_exit(char **args)
 {
 	while (1 || args)
