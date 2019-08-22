@@ -17,6 +17,7 @@
 
 extern char **environ;
 
+char *_strchr(char *s, char c);
 char *_strcpy(char *dest, char *src);
 char *_strncpy(char *dest, char *src, int n);
 int launch(char **token);
