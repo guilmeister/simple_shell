@@ -25,13 +25,8 @@ int main(int ac, char **av, char **env)
 			my_env(env);
 			continue;
 		}
-		if (_strcmp("path\n", buffer) == 0)
-		{
-			my_path(env);
-			continue;
-		}
 		token = strbreak(buffer);
-		exec(token);
+		exec(token, env);
 	}
 	free_tokens(token);
 	free(buffer);
@@ -75,32 +70,6 @@ int my_env(char **env)
 	{
 		write(STDOUT_FILENO, env[x], _strlen(env[x]));
 		_putchar('\n');
-	}
-	return (EXIT_SUCCESS);
-}
-
-int my_path(char **env)
-{
-	int x;
-	char *token;
-	char *buffer = "ls";
-	char *concat;
-
-	for (x = 0; env[x] != NULL; x++)
-	{
-		token = strtok(env[x], "=");
-
-		if(_strcmp(env[x], "PATH") == 0)
-		{
-			while (token != NULL)
-			{
-				token = _strdup_path(strtok(NULL, ":"));
-				if (token == NULL)
-					break;
-				concat = _strcat(token, buffer);
-				printf("%s\n", concat);
-			}
-		}
 	}
 	return (EXIT_SUCCESS);
 }
