@@ -2,7 +2,7 @@
 
 void DoExec(char *file, char *argv[])
 {
-	register int i;
+	register int i = 0;
 	char *newArgv[MAX_ARGS + 1];
 
 	execve(file, argv, environ);
@@ -10,7 +10,6 @@ void DoExec(char *file, char *argv[])
 	{
 		for (i = 0; argv[i] != 0; i++)
 		{
-			/* Empty loop body */
 		}
 		if (i >= MAX_ARGS)
 		{
@@ -20,47 +19,46 @@ void DoExec(char *file, char *argv[])
 		newArgv[1] = file;
 		for (i = 1; argv[i] != 0; i++)
 		{
-			newArgv[i+1] = argv[i];
+			newArgv[i + 1] = argv[i];
 		}
-		newArgv[i+1] = 0;
+		newArgv[i + 1] = NULL;
 		execve("/bin/sh", newArgv, environ);
 	}
 }
 int __execvp(char *name, char *argv[])
 {
-	char *path;
-	char fullName[MAX_NAME_SIZE+1];
+	char *path = pEnv("PATH");
+	char fullName[MAX_NAME_SIZE + 1];
 	register char *first, *last;
-	int nameLength, size, noAccess = 0;
+	int nameLength = 0, size = 0, noAccess = 0;
 
 	if (index(name, '/') != 0)
 	{
 	DoExec(name, argv);
-	return -1;
+	return (-1);
 	}
-	path = pEnv("PATH");
 	if (path == 0)
 	{
 		path = "/usr/local/bin:/bin:/usr/bin";
 	}
-	nameLength = strlen(name);
+	nameLength = _strlen(name);
 	for (first = path; ; first = last+1)
 	{
 		for (last = first; (*last != 0) && (*last != ':'); last++)
 		{
 		}
-		size = last-first;
+		size = last - first;
 		if ((size + nameLength + 2) >= MAX_NAME_SIZE)
 		{
 			continue;
 		}
-		(void) strncpy(fullName, first, size);
+		(void) _strncpy(fullName, first, size);
 		if (last[-1] != '/')
 		{
 			fullName[size] = '/';
 			size++;
 		}
-		(void) strcpy(fullName + size, name);
+		(void) _strcpy(fullName + size, name);
 		DoExec(fullName, argv);
 		if (errno == EACCES)
 		{
@@ -78,7 +76,7 @@ int __execvp(char *name, char *argv[])
 			break;
 		}
 	}
-	return -1;
+	return (-1);
 }
 int launch(char **token)
 {
