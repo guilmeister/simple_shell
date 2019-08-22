@@ -53,10 +53,14 @@ int my_cd(char **args)
 int my_help(char **args)
 {
 	args++;
-	write(2, "Welcome to Trevor's and Ed's simple Unix shell!\n", 56);
-	write(2, "type program names and arguments and press enter\n", 56);
-	write(2, "cd, help, env, and exit are built in commmands\n", 48);
-	write(2, "Use the man command to find info on other programs\n", 52);
+	write(STDOUT_FILENO, "Welcome to Trevor's and Ed's simple\
+ Unix shell!\n", 56);
+	write(STDOUT_FILENO, "type program names and arguments and press\
+ enter\n", 56);
+	write(STDOUT_FILENO, "cd, help, env, and exit are built in\
+ commmands\n", 48);
+	write(STDOUT_FILENO, "Use the man command to find info on other\
+ programs\n", 52);
 	return (1);
 }
 int my_exit(char **args)
