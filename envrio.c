@@ -23,14 +23,10 @@ char *pEnv(char *name)
 		     charPtr++, namePtr++)
 		{
 			if (*charPtr == '=')
-			{
 				break;
-			}
 		}
 		if ((*charPtr == '=') && (!*namePtr))
-		{
 			return (charPtr + 1);
-		}
 	}
 	return (NULL);
 }
