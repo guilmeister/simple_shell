@@ -1,8 +1,14 @@
 #include "holberton.h"
-
+/**
+ * DoExec - function called by __execvp to execute args
+ * @file: char pointer
+ * @argv: arg vector
+ *
+ * Return: void
+ */
 void DoExec(char *file, char *argv[])
 {
-	register int i = 0;
+	int i = 0;
 	char *newArgv[MAX_ARGS + 1];
 
 	execve(file, argv, environ);
@@ -25,10 +31,19 @@ void DoExec(char *file, char *argv[])
 		execve("/bin/sh", newArgv, environ);
 	}
 }
+/**
+ * __execvp - implentation of the "execvp" function
+ * @name: char pointer
+ * @argv: argument vector
+ *
+ *
+ * Return: -1
+ */
 int __execvp(char *name, char *argv[])
 {
 	char *path = pEnv("PATH");
 	char fullName[MAX_NAME_SIZE + 1];
+
 	register char *first, *last;
 	int size = 0, noAccess = 0;
 
@@ -67,6 +82,13 @@ int __execvp(char *name, char *argv[])
 	}
 	return (-1);
 }
+/**
+ * launch - launch child process and call __execvp
+ * @token: char double pointer
+ *
+ *
+ * Return: 1
+ */
 int launch(char **token)
 {
 	pid_t pid;
