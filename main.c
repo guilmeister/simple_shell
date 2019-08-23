@@ -5,7 +5,8 @@ int main(int ac, char **av, char **env)
 	char *buffer = NULL;
 	char **token;
 	size_t length = 0;
-	int check;
+	int check, x;
+	int counter = 0;
 
 	(void)ac;
 	(void)av;
@@ -19,7 +20,9 @@ int main(int ac, char **av, char **env)
 			perror("Error");
 		}
 		while (space_finder(*buffer))
-		       buffer++;
+		{	buffer++;
+			counter++;
+		}
 		if (_strcmp("\n", buffer) == 0)
 			continue;
 		if (_strcmp("env\n", buffer) == 0)
@@ -33,6 +36,8 @@ int main(int ac, char **av, char **env)
 		free_tokens(token);
 		free(token);
 	}
+	for (x = 0; x < counter; x++)
+		buffer--;
 	free(buffer);
 	return (EXIT_SUCCESS);
 }
