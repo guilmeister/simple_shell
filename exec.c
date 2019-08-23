@@ -10,7 +10,8 @@ int exec(char **args)
 
 	if (args[0] == NULL)
 	{
-		perror("error");
+		perror("Error");
+		free(args);
 		return (EXIT_FAILURE);
 	}
 	for (i = 0; i < 4; i++)
@@ -21,5 +22,6 @@ int exec(char **args)
 		}
 	}
 	launch(args);
-	return (1);
+
+	return (EXIT_SUCCESS);
 }

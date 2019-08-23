@@ -1,9 +1,3 @@
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
 #include "holberton.h"
 
 int main(int ac, char **av, char **env)
@@ -19,24 +13,30 @@ int main(int ac, char **av, char **env)
 	while (1)
 	{
 		write(STDOUT_FILENO, "$ ", 2);
-
 		check = getline(&buffer, &length, stdin);
 		if (check == -1 || !buffer)
 		{	free(buffer);
 			perror("Error");
 		}
+		while (space_finder(*buffer))
+		       buffer++;
+		if (_strcmp("\n", buffer) == 0)
+			continue;
 		if (_strcmp("env\n", buffer) == 0)
-		{
-			my_env(env);
+		{	my_env(env);
 			continue;
 		}
+		if (_strcmp("exit\n", buffer) == 0)
+			break;
 		token = strbreak(buffer);
 		exec(token);
+		free_tokens(token);
+		free(token);
 	}
-	free_tokens(token);
 	free(buffer);
-	return (0);
+	return (EXIT_SUCCESS);
 }
+
 int my_cd(char **args)
 {
 	if (args[1] == NULL)
@@ -47,7 +47,7 @@ int my_cd(char **args)
 	{
 		perror("Error");
 	}
-	return (1);
+	return (EXIT_SUCCESS);
 }
 
 int my_help(char **args)
@@ -57,8 +57,9 @@ int my_help(char **args)
 	write(2, "type program names and arguments and press enter\n", 56);
 	write(2, "cd, help, env, and exit are built in commmands\n", 48);
 	write(2, "Use the man command to find info on other programs\n", 52);
-	return (1);
+	return (EXIT_SUCCESS);
 }
+
 int my_exit(char **args)
 {
 	while (1 || args)

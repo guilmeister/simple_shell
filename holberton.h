@@ -41,5 +41,6 @@ char *_strdup(char *str);
 void free_tokens(char **buffer);
 int my_env(char **env);
 int _putchar(char c);
+int space_finder(char buffer);
 
 #endif

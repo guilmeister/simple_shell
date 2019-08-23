@@ -1,19 +1,15 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "holberton.h"
 
 char **strbreak(char *buffer)
 {
-	char **words;
+	char **words = NULL;
 	size_t index = 0;
 	char *token = NULL;
 
 	if (buffer == NULL)
 		return (NULL);
 
-	words = malloc(sizeof(char) * (_strlen(buffer)));
-
+	words = malloc(SIZE);
 	if (words == NULL)
 		return (NULL);
 
@@ -24,12 +20,13 @@ char **strbreak(char *buffer)
 
 		words[index] = _strdup(token);
 		if (words[index] == NULL)
-		{	free(words[index]);
+		{	free_tokens(words);
+			free(words);
 			return (NULL);
 		}
 		index++;
 	}
 	words[index] = NULL;
-
+	free(buffer);
 	return (words);
 }

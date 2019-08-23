@@ -1,11 +1,13 @@
 #include "holberton.h"
+
 /**
- * *_strchr - check string for certian char
+ * *_strchr - check string for certain char
  * @s: char pointer
  * @c: char.
  *
  * Return: Always 0.
  */
+
 char *_strchr(char *s, char c)
 {
 	while (*s++)
@@ -15,7 +17,6 @@ char *_strchr(char *s, char c)
 	}
 	return (0);
 }
-#include "holberton.h"
 
 /**
  * _strcmp - compares string s1 and s2
@@ -38,13 +39,14 @@ int _strcmp(char *s1, char *s2)
 	}
 	return (difference);
 }
-#include "holberton.h"
+
 /**
  * _strcpy - copy string
  * @dest: char
  * @src: char
  * Return: Always 0.
  */
+
 char *_strcpy(char *dest, char *src)
 {
 	while (*src)
@@ -54,7 +56,6 @@ char *_strcpy(char *dest, char *src)
 	*dest = '\0';
 	return (dest);
 }
-#include "holberton.h"
 
 /**
  * _strlen - counts string length
@@ -74,7 +75,6 @@ int _strlen(char *s)
 	}
 	return (counter);
 }
-#include "holberton.h"
 
 /**
  * _strdup - copy a given string to an allocated memory
@@ -88,7 +88,7 @@ char *_strdup(char *str)
 {
 	int i;
 	int n = 0;
-	char *string;
+	char *string = NULL;
 
 	if (str == NULL)
 		return (NULL);
@@ -96,7 +96,7 @@ char *_strdup(char *str)
 	for (i = 0; str[i] != '\0'; i++)
 		n++;
 
-	string = (char *) malloc((n + 1) * sizeof(char));
+	string = malloc((n + 1) * sizeof(char));
 
 	if (string == NULL)
 		return (NULL);
