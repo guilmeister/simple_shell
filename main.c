@@ -1,38 +1,39 @@
 #include "holberton.h"
 
-int main(int ac, char **av, char **env)
+int main(int acUnused __attribute__((unused)), char **av, char **env)
 {
 	char *buffer = NULL;
-	char **token;
+	char **token = NULL;
 	size_t length = 0;
-	int check, x;
-	int counter = 0;
+	int x, check, counter = 0;
+	pid_t parentpid = getpid();
 
-	(void)ac;
 	(void)av;
-
 	while (1)
-	{
-		write(STDOUT_FILENO, "$ ", 2);
+	{	write(STDOUT_FILENO, "$ ", 2);
 		check = getline(&buffer, &length, stdin);
 		if (check == -1 || !buffer)
 		{	free(buffer);
-			perror("Error");
-		}
+			perror("Error");	}
 		while (space_finder(*buffer))
 		{	buffer++;
-			counter++;
-		}
+			counter++;		}
 		if (_strcmp("\n", buffer) == 0)
 			continue;
 		if (_strcmp("env\n", buffer) == 0)
 		{	my_env(env);
-			continue;
-		}
+			continue;		}
 		if (_strcmp("exit\n", buffer) == 0)
 			break;
 		token = strbreak(buffer);
 		exec(token);
+		if (parentpid != getpid())
+		{
+			for (x = 0; x < counter; x++)
+				buffer--;
+			free(buffer);
+			exit(1);
+		}
 		free_tokens(token);
 		free(token);
 	}
