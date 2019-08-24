@@ -1,8 +1,9 @@
 #ifndef HOLBERTON_H
 #define HOLBERTON_H
-#define SIZE 1024
+#define SIZE 256
 #define MAX_NAME_SIZE 1000
 #define MAX_ARGS 1000
+
 #include <string.h>
 #include <sys/wait.h>
 #include <stdio.h>
@@ -14,6 +15,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <signal.h>
 
 extern char **environ;
 
