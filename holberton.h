@@ -1,6 +1,6 @@
 #ifndef HOLBERTON_H
 #define HOLBERTON_H
-#define SIZE 256
+#define SIZE 1024
 #define MAX_NAME_SIZE 1000
 #define MAX_ARGS 1000
 
