@@ -1,0 +1,87 @@
+.TH Simple Shell 3 "2019-08-23" "V1.0" "Simple Shell Man Page"
+
+.SH NAME
+Simple Shell
+
+.SH DESCRIPTION
+Simple Shell is a command line interpreter that provides a command line user interface.
+
+.SH COMMANDS
+
+.TP
+.SH
+Commands that allow you to handle files and directories:
+
+.IP cat
+Display file contents
+.IP cd
+Change directory to <directoryname>
+.IP chgrp
+Change file group
+.IP chmod
+Change file permission
+.IP cp
+Copy source file into destination file
+.IP file
+Determine file type
+.IP find
+Find files
+.IP grep
+Search files for the occurence of a string of characters that matches a specific pattern
+.IP head
+Display first 10 lines of a file
+.IP ln
+Create a hard link to an existing file
+.IP ls
+Display all files in the current directory
+.IP mkdir
+Create a new directory named <directoryname>
+.IP more
+Display contents of a file but not modify
+.IP mv
+Move one or more file or directory from one place to another
+.IP pwd
+Print current working directory
+.IP rmdir
+Delete an existing empty directory
+.IP tail
+Display last 10 lines of a file
+.IP touch
+Update access and modification time of a file
+
+.TP
+.SH
+Commands that allow you to manipulate data:
+
+.IP cmp
+Compare contents of two files
+.IP cut
+Cut selected fields of each line of a file
+.IP sort
+Sort file data in a particular order
+.IP tr
+Replace or remove specific characters
+.IP uniq
+Display consecutive identical lines to one
+.IP wc
+Count words, lines, and characters in a file
+.IP vi
+Open vi text editor
+.IP vim
+Open vim text editor
+.IP emacs
+Open emacs text editor
+
+.TP
+.SH
+Commands that list or alter information about the system:
+
+.IP echo
+Print the string input
+.IP kill
+Send a signal to a process to terminate
+.IP exit
+Quit the system
+
+.SH AUTHORS
+Trevor O'Farrell, Edward Guillermo
