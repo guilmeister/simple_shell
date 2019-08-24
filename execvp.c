@@ -77,8 +77,11 @@ int launch(char **token)
 	if (pid == 0)
 	{
 		if (__execvp(token[0], token) == -1)
-			perror("Error");
-			exit(1);
+		{	perror("Error");
+			free_tokens(token);
+			free(token);
+			return (1);
+		}
 	}
 	if (pid > 0)
 		wait(&status);
