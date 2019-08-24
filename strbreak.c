@@ -27,6 +27,6 @@ char **strbreak(char *buffer)
 		index++;
 	}
 	words[index] = NULL;
-	free(buffer);
+
 	return (words);
 }
