@@ -46,6 +46,7 @@ gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
 
 ## Usage
 
+```
 trevor@ubuntu:~/shell$ ./shell
 #cisfun$ ls
 ./shell: No such file or directory
@@ -65,6 +66,7 @@ trevor@ubuntu:~/shell$ echo "/bin/ls" | ./shell
 #cisfun$ barbie_j       env-main.c  exec.c  fork.c  pid.c  ppid.c    prompt   prompt.c  shell.c stat.c         wait
 env-environ.c  exec    fork    mypid   ppid   printenv  promptc  shell     stat test_scripting.sh  wait.c
 #cisfun$ trevor@ubuntu:~/shell$
+```
 
 ## List of allowed functions and system calls to use in the making of this shell
 
