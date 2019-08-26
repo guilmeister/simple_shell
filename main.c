@@ -7,7 +7,7 @@ void signal_handler(int signum)
 	write(STDOUT_FILENO, "$ ", 2);
 }
 
-int main(int acUnused __attribute__((unused)), char **av, char **env)
+int main(int ac, char **av, char **env)
 {
 	char *buffer = NULL;
 	char **token = NULL;
@@ -15,10 +15,13 @@ int main(int acUnused __attribute__((unused)), char **av, char **env)
 	int x, check, counter = 0;
 	pid_t parentpid = getpid();
 
+	(void)ac;
 	(void)av;
 	while (1)
-	{	signal(SIGINT, signal_handler);
-		write(STDOUT_FILENO, "$ ", 2);
+	{
+		signal(SIGINT, signal_handler);
+		if (isatty(STDIN_FILENO) == 1)
+			write(STDOUT_FILENO, "$ ", 2);
 		check = getline(&buffer, &length, stdin);
 		if (check == -1 || !buffer)
 		{	free(buffer);
@@ -35,6 +38,12 @@ int main(int acUnused __attribute__((unused)), char **av, char **env)
 			break;
 		token = strbreak(buffer);
 		exec(token);
+		if (isatty(STDIN_FILENO) == 0)
+		{
+			for (x = 0; x < counter; x++)
+				buffer--;
+			exit(1);
+		}
 		if (parentpid != getpid())
 		{
 			for (x = 0; x < counter; x++)
@@ -55,7 +64,7 @@ int my_cd(char **args)
 {
 	if (args[1] == NULL)
 	{
-		perror("error");
+		perror("Error");
 	}
 	else if (chdir(args[1]) != 0)
 	{

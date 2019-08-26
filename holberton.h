@@ -44,5 +44,7 @@ void free_tokens(char **buffer);
 int my_env(char **env);
 int _putchar(char c);
 int space_finder(char buffer);
+char *_strdup_path(char *str);
+char *_strcat(char *dest, char *src);
 
 #endif

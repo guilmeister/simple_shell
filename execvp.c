@@ -1,4 +1,5 @@
 #include "holberton.h"
+
 /**
  * DoExec - function called by __execvp to execute args
  * @file: char pointer
@@ -6,6 +7,7 @@
  *
  * Return: void
  */
+
 void DoExec(char *file, char *argv[])
 {
 	int i = 0;
@@ -31,6 +33,7 @@ void DoExec(char *file, char *argv[])
 		execve("/bin/sh", newArgv, environ);
 	}
 }
+
 /**
  * __execvp - implentation of the "execvp" function
  * @name: char pointer
@@ -39,12 +42,13 @@ void DoExec(char *file, char *argv[])
  *
  * Return: -1
  */
+
 int __execvp(char *name, char *argv[])
 {
 	char *path = pEnv("PATH");
 	char fullName[MAX_NAME_SIZE + 1];
 
-	register char *first, *last;
+	char *first, *last;
 	int size = 0, noAccess = 0;
 
 	if (_strchr(name, '/') != 0)
@@ -102,6 +106,8 @@ int launch(char **token)
 		{	perror("Error");
 			free_tokens(token);
 			free(token);
+			if (isatty(STDIN_FILENO) == 0)
+				exit(1);
 			return (1);
 		}
 	}
