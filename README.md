@@ -68,17 +68,17 @@ env-environ.c  exec    fork    mypid   ppid   printenv  promptc  shell     stat 
 $ trevor@ubuntu:~/shell$
 ```
 ## Non-Interactive Mode
-
-```$ echo "/bin/ls" | ./hsh
-hsh main.c shell.c test_ls_2
+```
+$ echo "/bin/ls" | ./hsh
+hsh main.c shell.c test_ls_2 ed
 $
 $ cat test_ls_2
 /bin/ls
 /bin/ls
 $
 $ cat test_ls_2 | ./hsh
-hsh main.c shell.c test_ls_2
-hsh main.c shell.c test_ls_2
+hsh main.c shell.c test_ls_2 ed
+hsh main.c shell.c test_ls_2 ed
 $
 ```
 
