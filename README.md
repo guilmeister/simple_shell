@@ -45,27 +45,41 @@ Your shell will be compiled this way:
 gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
 
 ## Usage
-
+## Interactive mode
 ```
 trevor@ubuntu:~/shell$ ./shell
-#cisfun$ ls
+$ ls
 ./shell: No such file or directory
-#cisfun$ /bin/ls
+$ /bin/ls
 barbie_j       env-main.c  exec.c  fork.c  pid.c  ppid.c    prompt   prompt.c  shell.c  stat.c         wait
 env-environ.c  exec    fork    mypid   ppid   printenv  promptc  shell     stat test_scripting.sh  wait.c
-#cisfun$ /bin/ls -l
+$ /bin/ls -l
 ./shell: No such file or directory
-#cisfun$ ^[[D^[[D^[[D
+$ ^[[D^[[D^[[D
 ./shell: No such file or directory
-#cisfun$ ^[[C^[[C^[[C^[[C
+$ ^[[C^[[C^[[C^[[C
 ./shell: No such file or directory
-#cisfun$ exit
+$ exit
 ./shell: No such file or directory
-#cisfun$ ^C
+$ ^C
 trevor@ubuntu:~/shell$ echo "/bin/ls" | ./shell
-#cisfun$ barbie_j       env-main.c  exec.c  fork.c  pid.c  ppid.c    prompt   prompt.c  shell.c stat.c         wait
+$ barbie_j       env-main.c  exec.c  fork.c  pid.c  ppid.c    prompt   prompt.c  shell.c stat.c         wait
 env-environ.c  exec    fork    mypid   ppid   printenv  promptc  shell     stat test_scripting.sh  wait.c
-#cisfun$ trevor@ubuntu:~/shell$
+$ trevor@ubuntu:~/shell$
+```
+## Non-Interactive Mode
+
+```$ echo "/bin/ls" | ./hsh
+hsh main.c shell.c test_ls_2
+$
+$ cat test_ls_2
+/bin/ls
+/bin/ls
+$
+$ cat test_ls_2 | ./hsh
+hsh main.c shell.c test_ls_2
+hsh main.c shell.c test_ls_2
+$
 ```
 
 ## List of allowed functions and system calls to use in the making of this shell
