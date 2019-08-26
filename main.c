@@ -1,5 +1,12 @@
 #include "holberton.h"
 
+void signal_handler(int signum)
+{
+	(void)signum;
+	_putchar('\n');
+	write(STDOUT_FILENO, "$ ", 2);
+}
+
 int main(int acUnused __attribute__((unused)), char **av, char **env)
 {
 	char *buffer = NULL;
@@ -10,7 +17,8 @@ int main(int acUnused __attribute__((unused)), char **av, char **env)
 
 	(void)av;
 	while (1)
-	{	write(STDOUT_FILENO, "$ ", 2);
+	{	signal(SIGINT, signal_handler);
+		write(STDOUT_FILENO, "$ ", 2);
 		check = getline(&buffer, &length, stdin);
 		if (check == -1 || !buffer)
 		{	free(buffer);
