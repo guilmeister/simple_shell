@@ -41,9 +41,9 @@ What is EOF / “end-of-file”?
 ## Compilation
 
 Your shell will be compiled this way:
-
+```
 gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
-
+```
 ## Usage
 ## Interactive mode
 ```
