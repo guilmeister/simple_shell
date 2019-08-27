@@ -1,5 +1,4 @@
 #include "holberton.h"
-
 /**
  * _putchar - writes the character c to stdout
  * @c: The character to print
@@ -13,6 +12,8 @@ int _putchar(char c)
 }
 /**
  * space_finder - finds space in string
+ *
+ * @buffer: char
  *
  * Return: 1 or 0
  */
@@ -45,6 +46,14 @@ char *_strncpy(char *dest, char *src, int n)
 		*dest++ = '\0';
 	return (ptr);
 }
+/**
+ * decrementBuffer - sets buffer back to intial value
+ *
+ * @buffer: char array
+ * @count: amount to decrement buffer by
+ *
+ * Return: 1 or 0
+ */
 int decrementBuffer(char *buffer, int count)
 {
 	int i = 0;
@@ -56,6 +65,13 @@ int decrementBuffer(char *buffer, int count)
 	free(buffer);
 	exit(1);
 }
+/**
+ * free_tokens - free allocated mem
+ *
+ * @buffer: char double pointer
+ *
+ * Return: 1 or 0
+ */
 void free_tokens(char **buffer)
 {
 	int x;

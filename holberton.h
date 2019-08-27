@@ -19,6 +19,7 @@
 
 extern char **environ;
 
+void signal_handler(int signum);
 int decrementBuffer(char *buffer, int count);
 char *_strchr(char *s, char c);
 char *_strcpy(char *dest, char *src);

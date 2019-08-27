@@ -1,6 +1,11 @@
 #include "holberton.h"
-
-int launch(char **tokens);
+/**
+ * exec - exec builtins and if not builtin launch args to be executed
+ *
+ * @args: char double pointer
+ *
+ * Return: 1 or 0
+ */
 int exec(char **args)
 {
 	int i;
@@ -11,7 +16,7 @@ int exec(char **args)
 	if (args[0] == NULL)
 	{
 		if (isatty(STDIN_FILENO) == 0)
-			exit (1);
+			exit(1);
 		perror("Error");
 		free(args);
 		return (EXIT_FAILURE);

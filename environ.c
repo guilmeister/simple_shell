@@ -1,5 +1,12 @@
 #include "holberton.h"
-
+/**
+ * my_env - prints user enviroment
+ *
+ *
+ * @env: char double pointer to environ
+ *
+ * Return: exit success
+ */
 int my_env(char **env)
 {
 	int x;
@@ -11,6 +18,13 @@ int my_env(char **env)
 	}
 	return (EXIT_SUCCESS);
 }
+/**
+ * pEnv - prints user enviroment
+ *
+ * @name: char pointer
+ *
+ * Return: NULL
+ */
 char *pEnv(char *name)
 {
 	char **envPtr;

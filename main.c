@@ -1,11 +1,13 @@
 #include "holberton.h"
-
-void signal_handler(int signum)
-{
-	(void)signum;
-	_putchar('\n');
-	write(STDOUT_FILENO, "$ ", 2);
-}
+/**
+ * main - starting point for the simple_shell program
+ *
+ * @argc: argument count
+ * @argv: argument vector
+ * @env: environ
+ *
+ * Return: exit success
+ */
 int main(int argc, char *argv[], char **env)
 {
 	char *buffer = NULL, **token = NULL;
