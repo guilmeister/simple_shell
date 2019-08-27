@@ -1,5 +1,12 @@
 #include "holberton.h"
-
+/**
+ * strbreak - parse string by spaces and save each arg into
+ * a 2D array
+ *
+ * @buffer: char string of args
+ *
+ * Return: 2D array of args, NULL upon failure
+ */
 char **strbreak(char *buffer)
 {
 	char **words = NULL;
