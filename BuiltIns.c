@@ -34,18 +34,18 @@ int my_help(char **args)
 		if (_strcmp("cd", args[1]) == 0)
 		{
 			write(2, "cd is used to navigate directories\n", 36);
-			write(2, "usage: cd <directory>\n", 23);
+			write(2, "Usage: cd <directory>\n", 23);
 		}
 		else if (_strcmp("env", args[1]) == 0)
 		{
 			write(2, "env prints the content of your enviroment\n", 43);
-			write(2, "usage: env\n", 12);
-			write(2, "for more information use man help\n", 35);
+			write(2, "Usage: env\n", 12);
+			write(2, "for more information use man env\n", 34);
 		}
 		else if (_strcmp("exit", args[1]) == 0)
 		{
 			write(2, "exit terminates all current processes\n", 39);
-			write(2, "usage: exit\n", 13);
+			write(2, "Usage: exit\n", 13);
 			write(2, "for more information use man exit\n", 35);
 		}
 	}
