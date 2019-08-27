@@ -48,6 +48,12 @@ int my_help(char **args)
 			write(2, "Usage: exit\n", 13);
 			write(2, "for more information use man exit\n", 35);
 		}
+		else
+		{
+			write(2, "help: no help topics match ", 27);
+			write(2, args[1], _strlen(args[1]));
+			write(2, "\n", 2);
+		}
 	}
 	if (!args[1])
 	{
