@@ -19,13 +19,14 @@
 
 extern char **environ;
 
+int decrementBuffer(char *buffer, int count);
 char *_strchr(char *s, char c);
 char *_strcpy(char *dest, char *src);
 char *_strncpy(char *dest, char *src, int n);
 int launch(char **token);
 int __execvp(char *name, char *argv[]);
 char *pEnv(char *name);
-void DoExec(char *file, char *argv[]);
+void execArgs(char *file, char *argv[]);
 char *_strchr(char *s, char c);
 char *_memcpy(char *dest, char *src, unsigned int n);
 size_t _strnlen(const char *str, size_t maxlen);

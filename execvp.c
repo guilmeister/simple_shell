@@ -1,19 +1,22 @@
 #include "holberton.h"
 
 /**
- * DoExec - function called by __execvp to execute args
+ * execArgs - function called by __execvp to execute args
  * @file: char pointer
  * @argv: arg vector
- *
+ * * * * *
+ * ENOEXEC - exec format error (POSIX.1-2001)
+ * * * * *
  * Return: void
  */
 
-void DoExec(char *file, char *argv[])
+void execArgs(char *file, char *argv[])
 {
 	int i = 0;
 	char *newArgv[MAX_ARGS + 1];
 
 	execve(file, argv, environ);
+
 	if (errno == ENOEXEC)
 	{
 		for (i = 0; argv[i] != 0; i++)
@@ -30,6 +33,7 @@ void DoExec(char *file, char *argv[])
 			newArgv[i + 1] = argv[i];
 		}
 		newArgv[i + 1] = NULL;
+
 		execve("/bin/sh", newArgv, environ);
 	}
 }
@@ -38,8 +42,11 @@ void DoExec(char *file, char *argv[])
  * __execvp - implentation of the "execvp" function
  * @name: char pointer
  * @argv: argument vector
- *
- *
+ * * * * *
+ * ENOENT - No such file or directory (POSIX.1-2001)
+ * EACCES - Permission denied (POSIX.1-2001)
+ * * * * *
+ * * * * *
  * Return: -1
  */
 
@@ -53,7 +60,7 @@ int __execvp(char *name, char *argv[])
 
 	if (_strchr(name, '/') != 0)
 	{
-		DoExec(name, argv);
+		execArgs(name, argv);
 		return (-1);
 	}
 	if (path == 0)
@@ -68,7 +75,7 @@ int __execvp(char *name, char *argv[])
 		if (last[-1] != '/')
 			fullName[size++] = '/';
 		_strcpy(fullName + size, name);
-		DoExec(fullName, argv);
+		execArgs(fullName, argv);
 		if (errno == EACCES)
 		{
 			noAccess = 1;
