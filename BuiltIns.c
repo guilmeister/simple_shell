@@ -28,11 +28,35 @@ int my_cd(char **args)
  */
 int my_help(char **args)
 {
-	args++;
-	write(2, "Welcome to Trevor's and Ed's simple Unix shell!\n", 56);
-	write(2, "type program names and arguments and press enter\n", 56);
-	write(2, "cd, help, env, and exit are built in commmands\n", 48);
-	write(2, "Use the man command to find info on other programs\n", 52);
+
+	if (args[1])
+	{
+		if (_strcmp("cd", args[1]) == 0)
+		{
+			write(2, "cd is used to navigate directories\n", 36);
+			write(2, "usage: cd <directory>\n", 23);
+		}
+		else if (_strcmp("env", args[1]) == 0)
+		{
+			write(2, "env prints the content of your enviroment\n", 43);
+			write(2, "usage: env\n", 12);
+			write(2, "for more information use man help\n", 35);
+		}
+		else if (_strcmp("exit", args[1]) == 0)
+		{
+			write(2, "exit terminates all current processes\n", 39);
+			write(2, "usage: exit\n", 13);
+			write(2, "for more information use man exit\n", 35);
+		}
+	}
+	if (!args[1])
+	{
+		write(2, "Welcome to Trevor's and Ed's simple Unix shell!\n", 56);
+		write(2, "type program names and arguments and press enter\n", 56);
+		write(2, "cd, help, env, and exit are built in commmands\n", 48);
+		write(2, "Use the man command to find info on other programs\n", 52);
+		write(2, "Usage: help <command>\n", 23);
+	}
 	return (EXIT_SUCCESS);
 }
 /**
@@ -50,7 +74,7 @@ int my_exit(char **args)
 	}
 }
 /**
- * signal_handler -
+ * signal_handler - handles signal inturupt from ctrl+c
  *
  * @signum: value from main
  *
