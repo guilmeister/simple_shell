@@ -7,7 +7,7 @@ void signal_handler(int signum)
 	write(STDOUT_FILENO, "$ ", 2);
 }
 
-int main(int ac, char **av, char **env)
+int main(int acUnused __attribute__((unused)), char **env)
 {
 	char *buffer = NULL;
 	char **token = NULL;
@@ -15,17 +15,19 @@ int main(int ac, char **av, char **env)
 	int x, check, counter = 0;
 	pid_t parentpid = getpid();
 
-	(void)ac;
-	(void)av;
 	while (1)
 	{
 		signal(SIGINT, signal_handler);
 		if (isatty(STDIN_FILENO) == 1)
 			write(STDOUT_FILENO, "$ ", 2);
 		check = getline(&buffer, &length, stdin);
-		if (check == -1 || !buffer)
-		{	free(buffer);
-			perror("Error");	}
+		if (isatty(STDIN_FILENO) == 0)
+		{
+			if (check == -1)
+			{
+				exit(1);
+			}
+		}
 		while (space_finder(*buffer))
 		{	buffer++;
 			counter++;		}
@@ -38,27 +40,18 @@ int main(int ac, char **av, char **env)
 			break;
 		token = strbreak(buffer);
 		exec(token);
-		if (isatty(STDIN_FILENO) == 0)
-		{
-			for (x = 0; x < counter; x++)
-				buffer--;
-			exit(1);
-		}
 		if (parentpid != getpid())
 		{
 			for (x = 0; x < counter; x++)
 				buffer--;
 			free(buffer);
-			exit(1);
-		}
+			exit(1);		}
 		free_tokens(token);
-		free(token);
-	}
+		free(token);	}
 	for (x = 0; x < counter; x++)
 		buffer--;
 	free(buffer);
-	return (EXIT_SUCCESS);
-}
+	return (EXIT_SUCCESS); }
 
 int my_cd(char **args)
 {

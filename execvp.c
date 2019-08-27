@@ -103,15 +103,16 @@ int launch(char **token)
 	if (pid == 0)
 	{
 		if (__execvp(token[0], token) == -1)
-		{	perror("Error");
-			free_tokens(token);
-			free(token);
+		{
 			if (isatty(STDIN_FILENO) == 0)
 				exit(1);
-			return (1);
+			perror("Error");
+			free_tokens(token);
+			free(token);
+			return (EXIT_SUCCESS);
 		}
 	}
 	if (pid > 0)
 		wait(&status);
-	return (1);
+	return (EXIT_SUCCESS);
 }
