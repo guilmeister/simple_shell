@@ -7,14 +7,16 @@ void signal_handler(int signum)
 	write(STDOUT_FILENO, "$ ", 2);
 }
 
-int main(int acUnused __attribute__((unused)), char **env)
+int main(int argc, char *argv[], char **env)
 {
 	char *buffer = NULL;
 	char **token = NULL;
 	size_t length = 0;
-	int x, check, counter = 0;
+	int check, counter = 0;
 	pid_t parentpid = getpid();
 
+	(void)argc;
+	(void)argv;
 	while (1)
 	{
 		signal(SIGINT, signal_handler);
@@ -42,16 +44,12 @@ int main(int acUnused __attribute__((unused)), char **env)
 		exec(token);
 		if (parentpid != getpid())
 		{
-			for (x = 0; x < counter; x++)
-				buffer--;
-			free(buffer);
-			exit(1);		}
+			decrementBuffer(buffer, counter); }
 		free_tokens(token);
 		free(token);	}
-	for (x = 0; x < counter; x++)
-		buffer--;
-	free(buffer);
-	return (EXIT_SUCCESS); }
+	decrementBuffer(buffer, counter);
+	return (EXIT_SUCCESS);
+}
 
 int my_cd(char **args)
 {
