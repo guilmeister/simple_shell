@@ -75,10 +75,8 @@ int my_help(char **args)
 int my_exit(char **args)
 {
 	(void)args;
-	while (1)
-	{
-		exit(EXIT_SUCCESS);
-	}
+
+	exit(EXIT_SUCCESS);
 }
 /**
  * signal_handler - handles signal inturupt from ctrl+c
