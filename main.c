@@ -12,7 +12,7 @@ int main(int argc, char **argv, char **env)
 {
 	char *buffer = NULL, **token = NULL;
 	size_t length = 0;
-	int check, counter = 0;
+	int check, exiting, counter = 0;
 	pid_t parentpid = getpid();
 
 	(void)argc;
@@ -41,12 +41,12 @@ int main(int argc, char **argv, char **env)
 		if (_strcmp("exit\n", buffer) == 0)
 			break;
 		token = strbreak(buffer);
-		exec(token);
+		exiting = exec(token);
 		if (parentpid != getpid())
 			decrementBuffer(buffer, counter);
 		free_tokens(token);
 		free(token);
 	}
 	decrementBuffer(buffer, counter);
-	return (EXIT_SUCCESS);
+	return (exiting);
 }

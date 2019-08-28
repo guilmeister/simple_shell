@@ -8,7 +8,7 @@
  */
 int exec(char **args)
 {
-	int i;
+	int i, exiting;
 
 	int (*builtin_func[]) (char **) = {&my_cd, &my_help, &my_exit, &my_env};
 	char *builtin_str[] = {"cd", "help", "exit", "env"};
@@ -28,7 +28,7 @@ int exec(char **args)
 			return ((*builtin_func[i])(args));
 		}
 	}
-	launch(args);
+	exiting = launch(args);
 
-	return (EXIT_SUCCESS);
+	return (exiting);
 }
