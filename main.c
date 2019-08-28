@@ -8,7 +8,7 @@
  *
  * Return: exit success
  */
-int main(int argc, char *argv[], char **env)
+int main(int argc, char **argv, char **env)
 {
 	char *buffer = NULL, **token = NULL;
 	size_t length = 0;
@@ -27,7 +27,7 @@ int main(int argc, char *argv[], char **env)
 		{
 			if (check == -1)
 			{
-				exit(EXIT_FAILURE);
+				exit(1);
 			}
 		}
 		while (space_finder(*buffer))
@@ -43,10 +43,10 @@ int main(int argc, char *argv[], char **env)
 		token = strbreak(buffer);
 		exec(token);
 		if (parentpid != getpid())
-		{
-			decrementBuffer(buffer, counter); }
+			decrementBuffer(buffer, counter);
 		free_tokens(token);
-		free(token);	}
+		free(token);
+	}
 	decrementBuffer(buffer, counter);
 	return (EXIT_SUCCESS);
 }
