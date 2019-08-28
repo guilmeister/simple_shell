@@ -36,10 +36,10 @@ int main(int argc, char **argv, char **env)
 		if (_strcmp("env\n", buffer) == 0)
 		{	my_env(env);
 			continue;		}
-		token = strbreak(buffer);
-		exiting = exec(token);
 		if (_strcmp("exit\n", buffer) == 0)
 			break;
+		token = strbreak(buffer);
+		exiting = exec(token);
 		if (parentpid != getpid())
 			decrementBuffer(buffer, counter);
 		free_tokens(token);
