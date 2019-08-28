@@ -116,7 +116,7 @@ int launch(char **token)
 		if (__execvp(token[0], token) == -1)
 		{
 			if (isatty(STDIN_FILENO) == 0)
-				exit(1);
+				exit(127);
 			perror("Error");
 			free_tokens(token);
 			free(token);
