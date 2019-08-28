@@ -16,7 +16,7 @@ int exec(char **args)
 	if (args[0] == NULL)
 	{
 		if (isatty(STDIN_FILENO) == 0)
-			exit(1);
+			exit(127);
 		perror("Error");
 		free(args);
 		return (EXIT_FAILURE);
