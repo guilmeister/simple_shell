@@ -74,7 +74,8 @@ int my_help(char **args)
  */
 int my_exit(char **args)
 {
-	while (1 || args)
+	(void)args;
+	while (1)
 	{
 		exit(EXIT_SUCCESS);
 	}
