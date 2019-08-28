@@ -63,7 +63,7 @@ int decrementBuffer(char *buffer, int count)
 		buffer--;
 	}
 	free(buffer);
-	exit(1);
+	exit(0);
 }
 /**
  * free_tokens - free allocated mem
