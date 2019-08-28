@@ -61,7 +61,7 @@ int __execvp(char *name, char *argv[])
 	if (_strchr(name, '/') != 0)
 	{
 		execArgs(name, argv);
-		exit(1);
+		exit(127);
 	}
 	if (path == 0)
 		path = "/usr/local/bin:/bin:/usr/bin";
@@ -117,10 +117,10 @@ int launch(char **token)
 		{
 			if (isatty(STDIN_FILENO) == 0)
 				exit(127);
-			perror("Error");
+			perror("THIS GUY");
 			free_tokens(token);
 			free(token);
-			return (EXIT_SUCCESS);
+			return (127);
 		}
 	}
 	if (pid > 0)
