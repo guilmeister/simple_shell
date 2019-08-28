@@ -27,7 +27,7 @@ int main(int argc, char *argv[], char **env)
 		{
 			if (check == -1)
 			{
-				exit(1);
+				exit(EXIT_FAILURE);
 			}
 		}
 		while (space_finder(*buffer))

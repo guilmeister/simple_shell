@@ -59,7 +59,7 @@ int my_help(char **args)
 	{
 		write(2, "Welcome to Trevor's and Ed's simple Unix shell!\n", 56);
 		write(2, "type program names and arguments and press enter\n", 56);
-		write(2, "cd, help, env, and exit are built in commmands\n", 48);
+		write(2, "cd, help, env, and exit are built in commands\n", 47);
 		write(2, "Use the man command to find info on other programs\n", 52);
 		write(2, "Usage: help <command>\n", 23);
 	}
@@ -74,10 +74,18 @@ int my_help(char **args)
  */
 int my_exit(char **args)
 {
-	while (1 || args)
+	uintptr_t status = (uintptr_t) args[1];
+
+	printf("print this: %p", (void *) status);
+	if (status)
+	{
+		exit(status);
+	}
+	while (args[0] && !args[1])
 	{
 		exit(EXIT_SUCCESS);
 	}
+	return (EXIT_SUCCESS);
 }
 /**
  * signal_handler - handles signal inturupt from ctrl+c
