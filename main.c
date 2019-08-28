@@ -12,7 +12,7 @@ int main(int argc, char **argv, char **env)
 {
 	char *buffer = NULL, **token = NULL;
 	size_t length = 0;
-	int check, exiting, counter = 0;
+	int exiting, counter = 0;
 	pid_t parentpid = getpid();
 
 	(void)argc;
@@ -22,13 +22,11 @@ int main(int argc, char **argv, char **env)
 		signal(SIGINT, signal_handler);
 		if (isatty(STDIN_FILENO) == 1)
 			write(STDOUT_FILENO, "$ ", 2);
-		check = getline(&buffer, &length, stdin);
-		if (isatty(STDIN_FILENO) == 0)
+		if (getline(&buffer, &length, stdin) == EOF)
 		{
-			if (check == -1 || check == EOF)
-			{
-				exit(EXIT_FAILURE);
-			}
+			if (isatty(STDIN_FILENO) == 1)
+				write (STDOUT_FILENO, "\n", 2);
+			break;
 		}
 		while (space_finder(*buffer))
 		{	buffer++;
