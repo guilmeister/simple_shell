@@ -25,9 +25,9 @@ int main(int argc, char **argv, char **env)
 		check = getline(&buffer, &length, stdin);
 		if (isatty(STDIN_FILENO) == 0)
 		{
-			if (check == -1)
+			if (check == -1 || check == EOF)
 			{
-				exit(1);
+				exit(EXIT_FAILURE);
 			}
 		}
 		while (space_finder(*buffer))
