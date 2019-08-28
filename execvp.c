@@ -107,7 +107,7 @@ int __execvp(char *name, char *argv[])
 int launch(char **token)
 {
 	pid_t pid;
-	int status;
+	int status, exiting;
 
 	pid = fork();
 
@@ -117,7 +117,7 @@ int launch(char **token)
 		{
 			if (isatty(STDIN_FILENO) == 0)
 				exit(1);
-			perror("simple_shell");
+			perror("Error");
 			free_tokens(token);
 			free(token);
 			return (EXIT_SUCCESS);
@@ -125,9 +125,11 @@ int launch(char **token)
 	}
 	if (pid > 0)
 	{
-		do {
-			waitpid(pid, &status, WUNTRACED);
-		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
+		waitpid(pid, &status, WUNTRACED);
 	}
-	return (EXIT_FAILURE);
+
+	if (WIFEXITED(status))
+		exiting = WEXITSTATUS(status);
+
+	return (exiting);
 }
