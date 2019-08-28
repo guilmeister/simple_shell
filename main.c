@@ -25,7 +25,7 @@ int main(int argc, char **argv, char **env)
 		if (getline(&buffer, &length, stdin) == EOF)
 		{
 			if (isatty(STDIN_FILENO) == 1)
-				write (STDOUT_FILENO, "\n", 2);
+				write(STDOUT_FILENO, "\n", 2);
 			break;
 		}
 		while (space_finder(*buffer))
