@@ -74,18 +74,10 @@ int my_help(char **args)
  */
 int my_exit(char **args)
 {
-	uintptr_t status = (uintptr_t) args[1];
-
-	printf("print this: %p", (void *) status);
-	if (status)
-	{
-		exit(status);
-	}
-	while (args[0] && !args[1])
+	while (1 || args)
 	{
 		exit(EXIT_SUCCESS);
 	}
-	return (EXIT_SUCCESS);
 }
 /**
  * signal_handler - handles signal inturupt from ctrl+c

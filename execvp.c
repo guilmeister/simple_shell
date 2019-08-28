@@ -24,7 +24,7 @@ void execArgs(char *file, char *argv[])
 		}
 		if (i >= MAX_ARGS)
 		{
-			return;
+			exit(EXIT_FAILURE);
 		}
 		newArgv[0] = "sh";
 		newArgv[1] = file;
@@ -61,7 +61,7 @@ int __execvp(char *name, char *argv[])
 	if (_strchr(name, '/') != 0)
 	{
 		execArgs(name, argv);
-		return (-1);
+		exit(1);
 	}
 	if (path == 0)
 		path = "/usr/local/bin:/bin:/usr/bin";
@@ -96,9 +96,13 @@ int __execvp(char *name, char *argv[])
 /**
  * launch - launch child process and call __execvp
  * @token: char double pointer
- *
- *
- * Return: 1
+ * * * * * * * * * * *
+ * WUNTRACED - return if a child has stopped
+ * WIFEXITED - returns true if the child terminated normally, that is, by
+ * calling exit(3) or _exit(2), or by returning from main
+ * WIFSIGNALED - returns true if the child process was terminated by a signal
+ * * * * * * * * * * *
+ *  Return: EXIT_FAILURE
  */
 int launch(char **token)
 {
@@ -120,6 +124,10 @@ int launch(char **token)
 		}
 	}
 	if (pid > 0)
-		wait(&status);
-	return (EXIT_SUCCESS);
+	{
+		do {
+			waitpid(pid, &status, WUNTRACED);
+		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
+	}
+	return (EXIT_FAILURE);
 }
