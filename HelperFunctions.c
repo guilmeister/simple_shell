@@ -58,7 +58,7 @@ int decrementBuffer(char *buffer, int count)
 {
 	int i = 0;
 
-	for (i = 0; i > count; i++)
+	for (i = 0; i < count; i++)
 	{
 		buffer--;
 	}
