@@ -33,7 +33,7 @@ int my_help(char **args)
 	{
 		if (_strcmp("cd", args[1]) == 0)
 		{
-			write(2, "cd is used to navigate directories\n", 36);
+			write(2, "cd is used to navigate directories\n", 35);
 			write(2, "Usage: cd <directory>\n", 23);
 		}
 		else if (_strcmp("env", args[1]) == 0)
@@ -57,11 +57,11 @@ int my_help(char **args)
 	}
 	if (!args[1])
 	{
-		write(2, "Welcome to Trevor's and Ed's simple Unix shell!\n", 56);
-		write(2, "type program names and arguments and press enter\n", 56);
-		write(2, "cd, help, env, and exit are built in commands\n", 47);
-		write(2, "Use the man command to find info on other programs\n", 52);
-		write(2, "Usage: help <command>\n", 23);
+		write(2, "Welcome to Trevor's and Ed's simple Unix shell!\n", 48);
+		write(2, "type program names and arguments and press enter\n", 49);
+		write(2, "cd, help, env, and exit are built in commands\n", 46);
+		write(2, "Use the man command to find info on other programs\n", 51);
+		write(2, "Usage: help <command>\n", 22);
 	}
 	return (EXIT_SUCCESS);
 }
