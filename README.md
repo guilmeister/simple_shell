@@ -84,6 +84,7 @@ $
 
 ## Requirements
 ## General
+```
 Allowed editors: vi, vim, emacs
 All your files will be compiled on Ubuntu 14.04 LTS
 Your C programs and functions will be compiled with gcc 4.8.4 using the flags -Wall -Werror -Wextra and -pedantic
@@ -93,6 +94,7 @@ Your code should use the Betty style. It will be checked using betty-style.pl an
 No more than 5 functions per file
 All your header files should be include guarded
 Use system calls only when you need to (why?)
+```
 
 ## List of allowed functions and system calls to use in the making of this shell
 
