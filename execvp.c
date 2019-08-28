@@ -117,7 +117,7 @@ int launch(char **token)
 		{
 			if (isatty(STDIN_FILENO) == 0)
 				exit(1);
-			perror("Error");
+			perror("simple_shell");
 			free_tokens(token);
 			free(token);
 			return (EXIT_SUCCESS);
