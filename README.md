@@ -41,8 +41,66 @@ What is EOF / “end-of-file”?
 ## Compilation
 
 Your shell will be compiled this way:
-
+```
 gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
+```
+## Usage
+## Interactive mode
+```
+trevor@ubuntu:~/shell$ ./shell
+$ ls
+./shell: No such file or directory
+$ /bin/ls
+barbie_j       env-main.c  exec.c  fork.c  pid.c  ppid.c    prompt   prompt.c  shell.c  stat.c         wait
+env-environ.c  exec    fork    mypid   ppid   printenv  promptc  shell     stat test_scripting.sh  wait.c
+$ /bin/ls -l
+./shell: No such file or directory
+$ ^[[D^[[D^[[D
+./shell: No such file or directory
+$ ^[[C^[[C^[[C^[[C
+./shell: No such file or directory
+$ exit
+./shell: No such file or directory
+$ ^C
+trevor@ubuntu:~/shell$ echo "/bin/ls" | ./shell
+$ barbie_j       env-main.c  exec.c  fork.c  pid.c  ppid.c    prompt   prompt.c  shell.c stat.c         wait
+env-environ.c  exec    fork    mypid   ppid   printenv  promptc  shell     stat test_scripting.sh  wait.c
+$ trevor@ubuntu:~/shell$
+```
+## Non-Interactive Mode
+```
+$ echo "/bin/ls" | ./hsh
+hsh main.c shell.c test_ls_2 ed
+$
+$ cat test_ls_2
+/bin/ls
+/bin/ls
+$
+$ cat test_ls_2 | ./hsh
+hsh main.c shell.c test_ls_2 ed
+hsh main.c shell.c test_ls_2 ed
+$
+```
+
+## Requirements
+## General
+Allowed editors: vi, vim, emacs
+
+All your files will be compiled on Ubuntu 14.04 LTS
+
+Your C programs and functions will be compiled with gcc 4.8.4 using the flags -Wall -Werror -Wextra and -pedantic
+
+All your files should end with a new line
+
+A README.md file, at the root of the folder of the project is mandatory
+
+Your code should use the Betty style. It will be checked using betty-style.pl and betty-doc.pl
+
+No more than 5 functions per file
+
+All your header files should be include guarded
+
+Use system calls only when you need to (why?)
 
 ## List of allowed functions and system calls to use in the making of this shell
 

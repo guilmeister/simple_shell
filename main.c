@@ -1,61 +1,50 @@
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
 #include "holberton.h"
-
-int main(int ac, char **av)
+/**
+ * main - starting point for the simple_shell program
+ *
+ * @argc: argument count
+ * @argv: argument vector
+ * @env: environ
+ *
+ * Return: exit success
+ */
+int main(int argc, char **argv, char **env)
 {
-	char *buffer = NULL;
-	char **token;
+	char *buffer = NULL, **token = NULL;
 	size_t length = 0;
-	int check;
+	int exiting, counter = 0;
+	pid_t parentpid = getpid();
 
-	(void)ac;
-	(void)av;
-
+	(void)argc;
+	(void)argv;
 	while (1)
 	{
-		write(STDOUT_FILENO, "$ ", 2);
-
-		check = getline(&buffer, &length, stdin);
-		if (check == -1)
-		{free(buffer);
-			perror("Error");
-			exit(98);
+		signal(SIGINT, signal_handler);
+		if (isatty(STDIN_FILENO) == 1)
+			write(STDOUT_FILENO, "$ ", 2);
+		if (getline(&buffer, &length, stdin) == EOF)
+		{
+			if (isatty(STDIN_FILENO) == 1)
+				write(STDOUT_FILENO, "\n", 2);
+			break;
 		}
+		while (space_finder(*buffer))
+		{	buffer++;
+			counter++;		}
+		if (_strcmp("\n", buffer) == 0)
+			continue;
+		if (_strcmp("env\n", buffer) == 0)
+		{	my_env(env);
+			continue;		}
+		if (_strcmp("exit\n", buffer) == 0)
+			break;
 		token = strbreak(buffer);
-		exec(token);
+		exiting = exec(token);
+		if (parentpid != getpid())
+			decrementBuffer(buffer, counter);
+		free_tokens(token);
+		free(token);
 	}
-	free_tokens(token);
-	free(buffer);
-	return (0);
-}
-int my_cd(char **args)
-{
-	if (args[1] == NULL)
-	{
-		perror("error");
-	}
-	else if (chdir(args[1]) != 0)
-	{
-		perror("Error");
-	}
-	return (1);
-}
-int my_help(char **args)
-{
-	args++;
-	write(2, "Welcome to Trevor's and Ed's simple Unix shell!\n", 56);
-	write(2, "type program names and arguments and press enter\n", 56);
-	write(2, "cd, help, and exit are built in commmands\n", 45);
-	write(2, "Use the man command to find info on other programs\n", 52);
-	return (1);
-}
-int my_exit(char **args)
-{
-	args = args;
-	exit(0);
+	decrementBuffer(buffer, counter);
+	return (exiting);
 }

@@ -1,28 +1,34 @@
 #include "holberton.h"
-int launch(char **tokens);
+/**
+ * exec - exec builtins and if not builtin launch args to be executed
+ *
+ * @args: char double pointer
+ *
+ * Return: 1 or 0
+ */
 int exec(char **args)
 {
-	int i;
-	int (*builtin_func[]) (char **) = {&my_cd, &my_help, &my_exit};
-	char *builtin_str[] = {"cd", "help", "exit"};
+	int i, exiting;
+
+	int (*builtin_func[]) (char **) = {&my_cd, &my_help, &my_exit, &my_env};
+	char *builtin_str[] = {"cd", "help", "exit", "env"};
 
 	if (args[0] == NULL)
 	{
-		perror("error");
+		if (isatty(STDIN_FILENO) == 0)
+			exit(127);
+		perror("Error");
+		free(args);
 		return (EXIT_FAILURE);
 	}
-	for (i = 0; i < 3; i++)
+	for (i = 0; i < 4; i++)
 	{
 		if (_strcmp(args[0], builtin_str[i]) == 0)
 		{
 			return ((*builtin_func[i])(args));
 		}
 	}
-	launch(args);
-	return(1);
-}
-int my_exit(char **args)
-{
-	args = args;
-	return (-1);
+	exiting = launch(args);
+
+	return (exiting);
 }

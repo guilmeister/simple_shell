@@ -1,19 +1,22 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "holberton.h"
-
+/**
+ * strbreak - parse string by spaces and save each arg into
+ * a 2D array
+ *
+ * @buffer: char string of args
+ *
+ * Return: 2D array of args, NULL upon failure
+ */
 char **strbreak(char *buffer)
 {
-	char **words;
+	char **words = NULL;
 	size_t index = 0;
 	char *token = NULL;
 
 	if (buffer == NULL)
 		return (NULL);
 
-	words = malloc(sizeof(char) * (_strlen(buffer)));
-
+	words = malloc(SIZE);
 	if (words == NULL)
 		return (NULL);
 
@@ -24,7 +27,8 @@ char **strbreak(char *buffer)
 
 		words[index] = _strdup(token);
 		if (words[index] == NULL)
-		{free(words[index]);
+		{	free_tokens(words);
+			free(words);
 			return (NULL);
 		}
 		index++;
