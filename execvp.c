@@ -1,7 +1,7 @@
 #include "holberton.h"
-
 /**
  * execArgs - function called by __execvp to execute args
+ *
  * @file: char pointer
  * @argv: arg vector
  * * * * *
@@ -19,7 +19,7 @@ void execArgs(char *file, char *argv[])
 
 	if (errno == ENOEXEC)
 	{
-		for (i = 0; argv[i] != 0; i++)
+		for (i = 0; argv[i]; i++)
 		{
 		}
 		if (i >= MAX_ARGS)
@@ -33,29 +33,25 @@ void execArgs(char *file, char *argv[])
 			newArgv[i + 1] = argv[i];
 		}
 		newArgv[i + 1] = NULL;
-
 		execve("/bin/sh", newArgv, environ);
 	}
 }
-
 /**
  * __execvp - implentation of the "execvp" function
+ *
  * @name: char pointer
  * @argv: argument vector
  * * * * *
  * ENOENT - No such file or directory (POSIX.1-2001)
  * EACCES - Permission denied (POSIX.1-2001)
  * * * * *
- * * * * *
  * Return: -1
  */
-
 int __execvp(char *name, char *argv[])
 {
 	char *path = pEnv("PATH");
 	char fullName[MAX_NAME_SIZE + 1];
-
-	char *first, *last;
+	char *first = NULL, *last = NULL;
 	int size = 0, noAccess = 0;
 
 	if (_strchr(name, '/') != 0)
@@ -63,8 +59,8 @@ int __execvp(char *name, char *argv[])
 		execArgs(name, argv);
 		exit(127);
 	}
-	if (path == 0)
-		path = "/usr/local/bin:/bin:/usr/bin";
+	if (!path)
+		path = "/usr/local/bin:/bin:/usr/bin:/usr/local/games:/usr/games";
 	for (first = path; ; first = last + 1)
 	{
 		for (last = first; (*last != 0) && (*last != ':'); last++)
@@ -97,10 +93,11 @@ int __execvp(char *name, char *argv[])
  * launch - launch child process and call __execvp
  * @token: char double pointer
  * * * * * * * * * * *
+ * WEXITSTATUS - Given status from a call to waitpid, return the exit
+ * status of the child.
  * WUNTRACED - return if a child has stopped
  * WIFEXITED - returns true if the child terminated normally, that is, by
  * calling exit(3) or _exit(2), or by returning from main
- * WIFSIGNALED - returns true if the child process was terminated by a signal
  * * * * * * * * * * *
  *  Return: EXIT_FAILURE
  */
@@ -117,7 +114,7 @@ int launch(char **token)
 		{
 			if (isatty(STDIN_FILENO) == 0)
 				exit(127);
-			perror("Error");
+			perror("simple_shell");
 			free_tokens(token);
 			free(token);
 			return (127);

@@ -28,19 +28,19 @@ int my_env(char **env)
 char *pEnv(char *name)
 {
 	char **envPtr;
-	char *charPtr;
+	char *ptr;
 	char *namePtr;
 
 	for (envPtr = environ; *envPtr; envPtr++)
 	{
-		for (charPtr = *envPtr, namePtr = name; *charPtr == *namePtr;
-		     charPtr++, namePtr++)
+		for (ptr = *envPtr, namePtr = name; *ptr == *namePtr;
+		     ptr++, namePtr++)
 		{
-			if (*charPtr == '=')
+			if (*ptr == '=')
 				break;
 		}
-		if ((*charPtr == '=') && (!*namePtr))
-			return (charPtr + 1);
+		if ((*ptr == '=') && (!*namePtr))
+			return (ptr + 1);
 	}
 	return (NULL);
 }

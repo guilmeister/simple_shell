@@ -17,7 +17,7 @@ int main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
-	while (1)
+	for (;;)
 	{
 		signal(SIGINT, signal_handler);
 		if (isatty(STDIN_FILENO) == 1)
